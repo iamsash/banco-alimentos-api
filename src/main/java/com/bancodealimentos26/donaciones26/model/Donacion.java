@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "donaciones")
-public class donaciones {
+public class Donacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,16 +17,16 @@ public class donaciones {
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    private usuario usuario;
+    private Usuario usuario;
 
     @ManyToOne
     @JoinColumn(name = "alimento_id", nullable = false)
-    private alimento alimento;
+    private Alimento alimento;
 
-    public donaciones() {
+    public Donacion() {
     }
 
-    public donaciones(Integer cantidad, LocalDate fecha, usuario usuario, alimento alimento) {
+    public Donacion(Integer cantidad, LocalDate fecha, Usuario usuario, Alimento alimento) {
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.usuario = usuario;
@@ -53,19 +53,19 @@ public class donaciones {
         this.fecha = fecha;
     }
 
-    public usuario getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public alimento getAlimento() {
+    public Alimento getAlimento() {
         return alimento;
     }
 
-    public void setAlimento(alimento alimento) {
+    public void setAlimento(Alimento alimento) {
         this.alimento = alimento;
     }
 }

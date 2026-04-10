@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "usuarios")
-public class usuario {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,10 +21,10 @@ public class usuario {
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
 
-    public usuario() {
+    public Usuario() {
     }
 
-    public usuario(String nombre, String email, String telefono, LocalDate fechaRegistro) {
+    public Usuario(String nombre, String email, String telefono, LocalDate fechaRegistro) {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
