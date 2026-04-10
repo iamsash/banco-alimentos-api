@@ -1,5 +1,7 @@
 package com.bancodealimentos26.donaciones26.model;
 
+
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -12,6 +14,8 @@ public class Donacion {
     private Long id;
 
     private Integer cantidad;
+
+
 
     private LocalDate fecha;
 

@@ -12,7 +12,6 @@ public class Alimento {
     private Long id;
 
     private String nombre;
-
     private String descripcion;
 
     @Column(name = "unidad_medida")
@@ -21,11 +20,9 @@ public class Alimento {
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
 
-    // Constructor vacío (OBLIGATORIO)
     public Alimento() {
     }
 
-    // Constructor con parámetros
     public Alimento(String nombre, String descripcion, String unidadMedida, LocalDate fechaRegistro) {
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -33,7 +30,6 @@ public class Alimento {
         this.fechaRegistro = fechaRegistro;
     }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }
