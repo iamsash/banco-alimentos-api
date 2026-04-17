@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
+//crea la ruta para el controlador de alimentos, con los métodos para listar y guardar alimentos.
 @RequestMapping("/alimentos")
 public class AlimentoController {
 

@@ -20,6 +20,7 @@ public class Usuario {
 
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
+    
 
     public Usuario() {
     }
@@ -28,7 +29,7 @@ public class Usuario {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
-        this.fechaRegistro = fechaRegistro;
+       this.fechaRegistro = fechaRegistro;  
     }
 
     public Long getId() {
@@ -57,7 +58,7 @@ public class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
+    } 
 
     public LocalDate getFechaRegistro() {
         return fechaRegistro;
