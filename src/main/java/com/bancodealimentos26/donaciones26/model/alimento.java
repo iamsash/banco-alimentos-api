@@ -28,6 +28,8 @@ public class Alimento {
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
         this.fechaRegistro = fechaRegistro;
+        this.fechaRegistro = LocalDate.now();
+    
     }
 
     public Long getId() {
