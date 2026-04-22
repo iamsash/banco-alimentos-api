@@ -1,7 +1,5 @@
 package com.bancodealimentos26.donaciones26.model;
 
-
-
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -13,9 +11,7 @@ public class Donacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Integer cantidad;
-
-
+    private Double cantidad;
 
     private LocalDate fecha;
 
@@ -30,7 +26,7 @@ public class Donacion {
     public Donacion() {
     }
 
-    public Donacion(Integer cantidad, LocalDate fecha, Usuario usuario, Alimento alimento) {
+    public Donacion(Double cantidad, LocalDate fecha, Usuario usuario, Alimento alimento) {
         this.cantidad = cantidad;
         this.fecha = fecha;
         this.usuario = usuario;
@@ -41,11 +37,11 @@ public class Donacion {
         return id;
     }
 
-    public Integer getCantidad() {
+    public Double getCantidad() {
         return cantidad;
     }
 
-    public void setCantidad(Integer cantidad) {
+    public void setCantidad(Double cantidad) {
         this.cantidad = cantidad;
     }
 

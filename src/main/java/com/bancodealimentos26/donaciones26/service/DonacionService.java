@@ -9,6 +9,7 @@ import com.bancodealimentos26.donaciones26.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,7 @@ public class DonacionService {
 
         donacion.setUsuario(usuario);
         donacion.setAlimento(alimento);
+        donacion.setFecha(LocalDate.now());
 
         return donacionRepository.save(donacion);
     }

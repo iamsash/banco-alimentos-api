@@ -5,8 +5,8 @@ import com.bancodealimentos26.donaciones26.repository.AlimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AlimentoService {
@@ -19,14 +19,25 @@ public class AlimentoService {
     }
 
     public Alimento guardarAlimento(Alimento alimento) {
+        alimento.setFechaRegistro(LocalDate.now());
         return alimentoRepository.save(alimento);
-    }
-
-    public Optional<Alimento> buscarPorId(Long id) {
-        return alimentoRepository.findById(id);
     }
 
     public void eliminarAlimento(Long id) {
         alimentoRepository.deleteById(id);
+    }
+
+    public Alimento actualizarAlimento(Long id, Alimento alimentoActualizado) {
+        Alimento alimento = alimentoRepository.findById(id).orElse(null);
+
+        if (alimento != null) {
+            alimento.setNombre(alimentoActualizado.getNombre());
+            alimento.setDescripcion(alimentoActualizado.getDescripcion());
+            alimento.setUnidadMedida(alimentoActualizado.getUnidadMedida());
+
+            return alimentoRepository.save(alimento);
+        }
+
+        return null;
     }
 }
