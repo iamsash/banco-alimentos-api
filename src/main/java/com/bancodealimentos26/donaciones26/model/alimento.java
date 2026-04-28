@@ -15,17 +15,22 @@ public class Alimento {
 
     private String nombre;
     private String descripcion;
-    private String categoria;
+   
 
     @Column(name = "unidad_medida")
     private String unidadMedida;
 
     @Column(name = "fecha_registro")
-    private LocalDate fechaRegistro;
+    private LocalDate fechaRegistro = LocalDate.now();
 
     @JsonIgnore
     @OneToMany(mappedBy = "alimento")
     private List<Donacion> donaciones;
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
 
     public Alimento() {
     }
@@ -57,14 +62,6 @@ public class Alimento {
         this.descripcion = descripcion;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
-
     public String getUnidadMedida() {
         return unidadMedida;
     }
@@ -87,5 +84,13 @@ public class Alimento {
 
     public void setDonaciones(List<Donacion> donaciones) {
         this.donaciones = donaciones;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
