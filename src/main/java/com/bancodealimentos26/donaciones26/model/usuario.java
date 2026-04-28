@@ -18,6 +18,7 @@ public class Usuario {
     @Column(unique = true)
     private String email;
 
+
     private String telefono;
 
     @Column(name = "fecha_registro")
@@ -26,6 +27,8 @@ public class Usuario {
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Donacion> donaciones;
+
+
 
     public Usuario() {
     }
@@ -81,3 +84,4 @@ public class Usuario {
         this.donaciones = donaciones;
     }
 }
+

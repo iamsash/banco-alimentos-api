@@ -11,6 +11,9 @@ import java.util.List;
 //Esta clase recibe peticiones HTTP y devuelve datos (JSON)”
 @RestController
 
+//perimite peticiones desde cualquier origen, es decir,
+//  desde cualquier dominio, lo que es útil para el desarrollo frontend.
+@CrossOrigin(origins = "*")
 //crea la ruta para el controlador de alimentos, con los métodos para listar y guardar alimentos.
 @RequestMapping("/alimentos")
 public class AlimentoController {
