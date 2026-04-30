@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "alimentos")
-public class Alimento {
+public class alimento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,22 +20,19 @@ public class Alimento {
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
 
-    // 🔥 NUEVO: fecha de vencimiento
     @Column(name = "fecha_vencimiento")
     private LocalDate fechaVencimiento;
 
-    // 🔥 NUEVO: categoría del alimento
     private String categoria;
 
-    // 🔥 NUEVO: estado (ACTIVO, VENCIDO, etc.)
     private String estado;
 
-    public Alimento() {
+    public alimento() {
         this.fechaRegistro = LocalDate.now();
         this.estado = "ACTIVO";
     }
 
-    public Alimento(String nombre, String descripcion, String unidadMedida, String categoria, LocalDate fechaVencimiento) {
+    public alimento(String nombre, String descripcion, String unidadMedida, String categoria, LocalDate fechaVencimiento) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
