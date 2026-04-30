@@ -29,19 +29,11 @@ public class UsuarioService {
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }
-
     public Usuario actualizarUsuario(Long id, Usuario usuarioActualizado) {
         return usuarioRepository.findById(id).map(usuario -> {
             usuario.setNombre(usuarioActualizado.getNombre());
             usuario.setEmail(usuarioActualizado.getEmail());
             usuario.setTelefono(usuarioActualizado.getTelefono());
-            
-            // Atributos nuevos agregados al Update
-            usuario.setDni(usuarioActualizado.getDni());
-            usuario.setDireccion(usuarioActualizado.getDireccion());
-            usuario.setTipoUsuario(usuarioActualizado.getTipoUsuario());
-            usuario.setActivo(usuarioActualizado.getActivo());
-            
             return usuarioRepository.save(usuario);
         }).orElse(null);
     }
