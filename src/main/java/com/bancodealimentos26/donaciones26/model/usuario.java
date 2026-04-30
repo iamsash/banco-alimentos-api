@@ -1,9 +1,7 @@
 package com.bancodealimentos26.donaciones26.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -22,10 +20,6 @@ public class Usuario {
 
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "usuario")
-    private List<Donacion> donaciones;
 
     public Usuario() {
     }
@@ -71,13 +65,5 @@ public class Usuario {
 
     public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
-    }
-
-    public List<Donacion> getDonaciones() {
-        return donaciones;
-    }
-
-    public void setDonaciones(List<Donacion> donaciones) {
-        this.donaciones = donaciones;
     }
 }

@@ -1,9 +1,7 @@
 package com.bancodealimentos26.donaciones26.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "alimentos")
@@ -22,18 +20,29 @@ public class Alimento {
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "alimento")
-    private List<Donacion> donaciones;
+    // 🔥 NUEVO: fecha de vencimiento
+    @Column(name = "fecha_vencimiento")
+    private LocalDate fechaVencimiento;
+
+    // 🔥 NUEVO: categoría del alimento
+    private String categoria;
+
+    // 🔥 NUEVO: estado (ACTIVO, VENCIDO, etc.)
+    private String estado;
 
     public Alimento() {
+        this.fechaRegistro = LocalDate.now();
+        this.estado = "ACTIVO";
     }
 
-    public Alimento(String nombre, String descripcion, String unidadMedida, LocalDate fechaRegistro) {
+    public Alimento(String nombre, String descripcion, String unidadMedida, String categoria, LocalDate fechaVencimiento) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
-        this.fechaRegistro = fechaRegistro;
+        this.categoria = categoria;
+        this.fechaVencimiento = fechaVencimiento;
+        this.fechaRegistro = LocalDate.now();
+        this.estado = "ACTIVO";
     }
 
     public Long getId() {
@@ -72,11 +81,27 @@ public class Alimento {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public List<Donacion> getDonaciones() {
-        return donaciones;
+    public LocalDate getFechaVencimiento() {
+        return fechaVencimiento;
     }
 
-    public void setDonaciones(List<Donacion> donaciones) {
-        this.donaciones = donaciones;
+    public void setFechaVencimiento(LocalDate fechaVencimiento) {
+        this.fechaVencimiento = fechaVencimiento;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

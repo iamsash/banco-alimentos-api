@@ -16,6 +16,11 @@ public class AlimentoService {
 
     public List<Alimento> listarAlimentos() {
         return alimentoRepository.findAll();
+
+    }
+    public Alimento obtenerPorId(Long id) {
+        return alimentoRepository.findById(id).orElse(null);
+         
     }
 
     public Alimento guardarAlimento(Alimento alimento) {
@@ -34,7 +39,6 @@ public class AlimentoService {
             alimento.setNombre(alimentoActualizado.getNombre());
             alimento.setDescripcion(alimentoActualizado.getDescripcion());
             alimento.setUnidadMedida(alimentoActualizado.getUnidadMedida());
-
             return alimentoRepository.save(alimento);
         }
 

@@ -1,4 +1,4 @@
-plugins {
+Plugins {
 	id 'java'
 	id 'org.springframework.boot' version '4.0.5'
 	id 'io.spring.dependency-management' version '1.1.7'
@@ -23,7 +23,6 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
 }
 
 tasks.named('test') {

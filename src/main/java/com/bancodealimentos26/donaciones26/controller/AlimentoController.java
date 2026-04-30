@@ -13,36 +13,40 @@ import java.util.List;
 
 //crea la ruta para el controlador de alimentos, con los métodos para listar y guardar alimentos.
 @RequestMapping("/alimentos")
+
 public class AlimentoController {
 
-//Oye Spring, dame el service para usarlo
     @Autowired
     private AlimentoService alimentoService;
 
-
-    //metodo de mostrar alimentos, con la ruta /alimentos y el verbo GET
+    // 🔹 LISTAR TODOS LOS ALIMENTOS
     @GetMapping
     public List<Alimento> listarAlimentos() {
         return alimentoService.listarAlimentos();
     }
 
+    // 🔹 OBTENER UN ALIMENTO POR ID
+    @GetMapping("/{id}")
+    public Alimento obtenerPorId(@PathVariable Long id) {
+        return alimentoService.obtenerPorId(id);
+    }
 
-    // metodo de agregar
+    // 🔹 GUARDAR UN NUEVO ALIMENTO
     @PostMapping
     public Alimento guardarAlimento(@RequestBody Alimento alimento) {
         return alimentoService.guardarAlimento(alimento);
-}
-
-//metodo de eliminar
-@DeleteMapping("/{id}")
-public void eliminarAlimento(@PathVariable Long id) {
-    alimentoService.eliminarAlimento(id);
-}
-
-@PutMapping("/{id}")
-public Alimento actualizarAlimento(@PathVariable Long id, @RequestBody Alimento alimento) {
-    return alimentoService.actualizarAlimento(id, alimento);
-}
-
     }
 
+    // 🔹 ACTUALIZAR UN ALIMENTO
+    @PutMapping("/{id}")
+    public Alimento actualizarAlimento(@PathVariable Long id, @RequestBody Alimento alimento) {
+        return alimentoService.actualizarAlimento(id, alimento);
+    }
+
+    // 🔹 ELIMINAR UN ALIMENTO
+    @DeleteMapping("/{id}")
+    public String eliminarAlimento(@PathVariable Long id) {
+        alimentoService.eliminarAlimento(id);
+        return "Alimento eliminado correctamente";
+    }
+}
