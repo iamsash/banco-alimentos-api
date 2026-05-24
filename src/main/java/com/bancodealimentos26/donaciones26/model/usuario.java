@@ -26,26 +26,32 @@ public class Usuario {
     @Column(unique = true)
     private String email;
 
-
     private String telefono;
 
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
 
+    private String dni;
+    private String direccion;
+    private String tipoUsuario;
+    private Boolean activo;
+
     @JsonIgnore
     @OneToMany(mappedBy = "usuario")
     private List<Donacion> donaciones;
 
-
-
     public Usuario() {
     }
 
-    public Usuario(String nombre, String email, String telefono, LocalDate fechaRegistro) {
+    public Usuario(String nombre, String email, String telefono, LocalDate fechaRegistro, String dni, String direccion, String tipoUsuario, Boolean activo) {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
         this.fechaRegistro = fechaRegistro;
+        this.dni = dni;
+        this.direccion = direccion;
+        this.tipoUsuario = tipoUsuario;
+        this.activo = activo;
     }
 
     public Long getId() {
@@ -91,5 +97,36 @@ public class Usuario {
     public void setDonaciones(List<Donacion> donaciones) {
         this.donaciones = donaciones;
     }
-}
 
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Boolean getActivo() {
+        return activo;
+    }
+
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
+    }
+}

@@ -21,6 +21,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.mysql:mysql-connector-j'
+	runtimeOnly 'com.microsoft.sqlserver:mssql-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-hateoas'
+	
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
