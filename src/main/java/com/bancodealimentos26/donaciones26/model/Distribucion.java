@@ -10,19 +10,28 @@ public class Distribucion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String beneficiario;
+
     private Double cantidad;
     private LocalDate fecha;
+    
+    @ManyToOne
+@JoinColumn(name = "beneficiario_id")
+private Beneficiario beneficiario;
+
+    @ManyToOne
+    @JoinColumn (name = "alimento_id")
+    private Alimento alimento;
+    
 
     public Long getId() {
         return id;
     }
 
-    public String getBeneficiario() {
+    public Beneficiario getBeneficiario() {
         return beneficiario;
     }
 
-    public void setBeneficiario(String beneficiario) {
+    public void setBeneficiario(Beneficiario beneficiario) {
         this.beneficiario = beneficiario;
     }
 
@@ -40,5 +49,12 @@ public class Distribucion {
 
     public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
+    }
+
+    public Alimento getAlimento() {
+        return alimento;
+    }
+    public void setAlimento(Alimento alimento) {
+        this.alimento = alimento;
     }
 }

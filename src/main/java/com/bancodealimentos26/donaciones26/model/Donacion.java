@@ -12,13 +12,12 @@ public class Donacion {
     private Long id;
 
     private Double cantidad;
-
     private LocalDate fecha;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
-
+    
     @ManyToOne
     @JoinColumn(name = "alimento_id", nullable = false)
     private Alimento alimento;

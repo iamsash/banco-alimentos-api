@@ -1,3 +1,5 @@
+
+
 package com.bancodealimentos26.donaciones26.controller;
 
 import com.bancodealimentos26.donaciones26.model.Usuario;
@@ -9,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
+@CrossOrigin(origins = "*")
 public class UsuarioController {
 
     @Autowired
@@ -33,3 +36,4 @@ public class UsuarioController {
         usuarioService.eliminarUsuario(id);
     }
 }
+

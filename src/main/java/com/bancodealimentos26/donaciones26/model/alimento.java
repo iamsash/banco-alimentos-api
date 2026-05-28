@@ -1,9 +1,11 @@
 package com.bancodealimentos26.donaciones26.model;
-
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.OneToMany;
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
+
 
 @Entity
 @Table(name = "alimentos")
@@ -15,6 +17,7 @@ public class Alimento {
 
     private String nombre;
     private String descripcion;
+    
    
 
     @Column(name = "unidad_medida")
@@ -31,6 +34,11 @@ public class Alimento {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "alimento")
+    private List<Distribucion> distribuciones;
+
+
 
     public Alimento() {
     }
@@ -40,6 +48,7 @@ public class Alimento {
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
         this.fechaRegistro = fechaRegistro;
+        
     }
 
     public Long getId() {
@@ -92,5 +101,13 @@ public class Alimento {
 
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
+    }
+
+    public List<Distribucion> getDistribuciones() {
+        return distribuciones;
+    }
+
+    public void setDistribuciones(List<Distribucion> distribuciones) {
+        this.distribuciones = distribuciones;
     }
 }
