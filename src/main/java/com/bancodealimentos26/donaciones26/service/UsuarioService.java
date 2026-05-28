@@ -29,12 +29,12 @@ public class UsuarioService {
     public void eliminarUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }
-    public Usuario actualizarUsuario(Long id, Usuario usuarioActualizado) {
-        return usuarioRepository.findById(id).map(usuario -> {
-            usuario.setNombre(usuarioActualizado.getNombre());
-            usuario.setEmail(usuarioActualizado.getEmail());
-            usuario.setTelefono(usuarioActualizado.getTelefono());
-            return usuarioRepository.save(usuario);
-        }).orElse(null);
-    }
-}
+public Usuario actualizarUsuario(Long id, Usuario usuarioActualizado) {
+    return usuarioRepository.findById(id).map(usuario -> {
+        usuario.setNombre(usuarioActualizado.getNombre());
+        usuario.setEmail(usuarioActualizado.getEmail());
+        usuario.setTelefono(usuarioActualizado.getTelefono());
+
+        return usuarioRepository.save(usuario);
+    }).orElse(null);
+}}
