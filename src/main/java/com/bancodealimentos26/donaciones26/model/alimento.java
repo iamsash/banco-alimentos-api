@@ -1,3 +1,5 @@
+
+
 package com.bancodealimentos26.donaciones26.model;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -37,6 +39,8 @@ public class Alimento {
     @JsonIgnore
     @OneToMany(mappedBy = "alimento")
     private List<Distribucion> distribuciones;
+
+    
 
 
 
