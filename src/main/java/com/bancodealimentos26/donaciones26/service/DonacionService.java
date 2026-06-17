@@ -1,5 +1,8 @@
 package com.bancodealimentos26.donaciones26.service;
 
+
+import com.bancodealimentos26.donaciones26.dto.DonacionDTO;
+import java.util.stream.Collectors;
 import com.bancodealimentos26.donaciones26.model.Alimento;
 import com.bancodealimentos26.donaciones26.model.Donacion;
 import com.bancodealimentos26.donaciones26.model.Usuario;
@@ -11,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 public class DonacionService {
@@ -25,13 +28,76 @@ public class DonacionService {
     @Autowired
     private AlimentoRepository alimentoRepository;
 
-    public List<Donacion> listarDonaciones() {
-        return donacionRepository.findAll();
+    public List<DonacionDTO> listarDonaciones() {
+
+    return donacionRepository.findAll()
+            .stream()
+            .map(donacion -> {
+
+                Long usuarioId = donacion.getUsuario() != null
+                        ? donacion.getUsuario().getId()
+                        : null;
+
+                String usuarioNombre = donacion.getUsuario() != null
+                        ? donacion.getUsuario().getNombre()
+                        : null;
+
+                Long alimentoId = donacion.getAlimento() != null
+                        ? donacion.getAlimento().getId()
+                        : null;
+
+                String alimentoNombre = donacion.getAlimento() != null
+                        ? donacion.getAlimento().getNombre()
+                        : null;
+
+                return new DonacionDTO(
+                        donacion.getId(),
+                        donacion.getCantidad(),
+                        donacion.getFecha(),
+                        usuarioId,
+                        usuarioNombre,
+                        alimentoId,
+                        alimentoNombre
+                );
+
+            })
+            .collect(Collectors.toList());
+}
+
+    public DonacionDTO buscarPorId(Long id) {
+
+    Donacion donacion = donacionRepository.findById(id).orElse(null);
+
+    if (donacion == null) {
+        return null;
     }
 
-    public Optional<Donacion> buscarPorId(Long id) {
-        return donacionRepository.findById(id);
-    }
+    Long usuarioId = donacion.getUsuario() != null
+            ? donacion.getUsuario().getId()
+            : null;
+
+    String usuarioNombre = donacion.getUsuario() != null
+            ? donacion.getUsuario().getNombre()
+            : null;
+
+    Long alimentoId = donacion.getAlimento() != null
+            ? donacion.getAlimento().getId()
+            : null;
+
+    String alimentoNombre = donacion.getAlimento() != null
+            ? donacion.getAlimento().getNombre()
+            : null;
+
+    return new DonacionDTO(
+            donacion.getId(),
+            donacion.getCantidad(),
+            donacion.getFecha(),
+            usuarioId,
+            usuarioNombre,
+            alimentoId,
+            alimentoNombre
+    );
+}
 
     public Donacion guardarDonacion(Donacion donacion) {
         Long usuarioId = donacion.getUsuario().getId();
@@ -53,4 +119,27 @@ public class DonacionService {
     public void eliminarDonacion(Long id) {
         donacionRepository.deleteById(id);
     }
+
+    public Donacion actualizarDonacion(Long id, Donacion donacionActualizada) {
+
+    Donacion donacion = donacionRepository.findById(id).orElse(null);
+
+    if (donacion == null) {
+        return null;
+    }
+
+    Usuario usuario = usuarioRepository.findById(
+            donacionActualizada.getUsuario().getId())
+            .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+    Alimento alimento = alimentoRepository.findById(
+            donacionActualizada.getAlimento().getId())
+            .orElseThrow(() -> new RuntimeException("Alimento no encontrado"));
+
+    donacion.setCantidad(donacionActualizada.getCantidad());
+    donacion.setUsuario(usuario);
+    donacion.setAlimento(alimento);
+
+    return donacionRepository.save(donacion);
+}
 }

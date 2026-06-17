@@ -1,5 +1,8 @@
 package com.bancodealimentos26.donaciones26.service;
 
+
+import com.bancodealimentos26.donaciones26.dto.AlimentoDTO;
+import java.util.stream.Collectors;
 import com.bancodealimentos26.donaciones26.model.Alimento;
 import com.bancodealimentos26.donaciones26.repository.AlimentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +16,32 @@ public class AlimentoService {
 
     @Autowired
     private AlimentoRepository alimentoRepository;
+public List<AlimentoDTO> listarAlimentos() {
 
-    public List<Alimento> listarAlimentos() {
-        return alimentoRepository.findAll();
-    }
+    return alimentoRepository.findAll()
+            .stream()
+            .map(alimento -> {
+
+                Long categoriaId = alimento.getCategoria() != null
+                        ? alimento.getCategoria().getId()
+                        : null;
+
+                String categoriaNombre = alimento.getCategoria() != null
+                        ? alimento.getCategoria().getNombre()
+                        : null;
+
+                return new AlimentoDTO(
+                        alimento.getId(),
+                        alimento.getNombre(),
+                        alimento.getDescripcion(),
+                        alimento.getUnidadMedida(),
+                        alimento.getFechaRegistro(),
+                        categoriaId,
+                        categoriaNombre
+                );
+            })
+            .collect(Collectors.toList());
+}
 
     public Alimento guardarAlimento(Alimento alimento) {
         alimento.setFechaRegistro(LocalDate.now());
@@ -40,4 +65,30 @@ public class AlimentoService {
 
         return null;
     }
-}
+
+  public AlimentoDTO obtenerPorId(Long id) {
+
+    Alimento alimento = alimentoRepository.findById(id).orElse(null);
+
+    if (alimento == null) {
+        return null;
+    }
+
+    Long categoriaId = alimento.getCategoria() != null
+            ? alimento.getCategoria().getId()
+            : null;
+
+    String categoriaNombre = alimento.getCategoria() != null
+            ? alimento.getCategoria().getNombre()
+            : null;
+
+    return new AlimentoDTO(
+            alimento.getId(),
+            alimento.getNombre(),
+            alimento.getDescripcion(),
+            alimento.getUnidadMedida(),
+            alimento.getFechaRegistro(),
+            categoriaId,
+            categoriaNombre
+    );
+}}

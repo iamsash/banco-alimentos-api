@@ -1,5 +1,6 @@
 package com.bancodealimentos26.donaciones26.controller;
 
+import com.bancodealimentos26.donaciones26.dto.CategoriaDTO;
 import com.bancodealimentos26.donaciones26.model.Categoria;
 import com.bancodealimentos26.donaciones26.service.CategoriaService;
 import org.springframework.http.ResponseEntity;
@@ -18,28 +19,32 @@ public class CategoriaController {
         this.categoriaService = categoriaService;
     }
 
+    // Listar categorías (DTO)
     @GetMapping
-    public List<Categoria> listarCategorias() {
+    public List<CategoriaDTO> listarCategorias() {
         return categoriaService.listarCategorias();
     }
 
+    // Buscar categoría por ID (DTO)
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> obtenerCategoria(@PathVariable Long id) {
+    public ResponseEntity<CategoriaDTO> obtenerCategoria(@PathVariable Long id) {
         return categoriaService.obtenerPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Guardar categoría (Entity)
     @PostMapping
     public Categoria guardarCategoria(@RequestBody Categoria categoria) {
         return categoriaService.guardarCategoria(categoria);
     }
 
+    // Actualizar categoría (Entity)
     @PutMapping("/{id}")
     public ResponseEntity<Categoria> actualizarCategoria(
             @PathVariable Long id,
-            @RequestBody Categoria categoria
-    ) {
+            @RequestBody Categoria categoria) {
+
         Categoria actualizada = categoriaService.actualizarCategoria(id, categoria);
 
         if (actualizada == null) {
@@ -49,8 +54,10 @@ public class CategoriaController {
         return ResponseEntity.ok(actualizada);
     }
 
+    // Eliminar categoría
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarCategoria(@PathVariable Long id) {
+
         boolean eliminado = categoriaService.eliminarCategoria(id);
 
         if (!eliminado) {

@@ -1,5 +1,7 @@
 package com.bancodealimentos26.donaciones26.service;
 
+import com.bancodealimentos26.donaciones26.dto.CategoriaDTO;
+import java.util.stream.Collectors;
 import com.bancodealimentos26.donaciones26.model.Categoria;
 import com.bancodealimentos26.donaciones26.repository.CategoriaRepository;  
 import org. springframework.stereotype.Service;
@@ -15,13 +17,28 @@ public class CategoriaService {
         this.categoriaRepository = categoriaRepository;
 
     }
-    public List<Categoria> listarCategorias() {
-        return categoriaRepository.findAll();
+    public List<CategoriaDTO> listarCategorias() {
+        return categoriaRepository.findAll()
+                .stream()
+                .map(categoria -> new CategoriaDTO(
+                        categoria.getId(),
+                        categoria.getNombre(),
+                        categoria.getDescripcion(),
+                        categoria.getFechaRegistro()
+                ))
+                .collect(Collectors.toList());
     }
 
-  public Optional<Categoria> obtenerPorId(Long id) {
-        return categoriaRepository.findById(id);
-    }
+ public Optional<CategoriaDTO> obtenerPorId(Long id) {
+
+    return categoriaRepository.findById(id)
+            .map(categoria -> new CategoriaDTO(
+                    categoria.getId(),
+                    categoria.getNombre(),
+                    categoria.getDescripcion(),
+                    categoria.getFechaRegistro()
+            ));
+}
 
 
     public Categoria guardarCategoria(Categoria categoria) {
