@@ -1,13 +1,12 @@
-
-
 package com.bancodealimentos26.donaciones26.model;
+
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.OneToMany;
-
 import jakarta.persistence.*;
 import java.time.LocalDate;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "alimentos")
@@ -17,14 +16,17 @@ public class Alimento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "El nombre del alimento no puede estar vacío")
     private String nombre;
-    private String descripcion;
-    
-   
 
+    @NotBlank(message = "La descripción es obligatoria")
+    private String descripcion;
+
+    @NotBlank(message = "La unidad de medida es obligatoria (ej. kg, litros)")
     @Column(name = "unidad_medida")
     private String unidadMedida;
 
+    @NotNull(message = "La fecha de registro es obligatoria")
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro = LocalDate.now();
 
@@ -40,10 +42,6 @@ public class Alimento {
     @OneToMany(mappedBy = "alimento")
     private List<Distribucion> distribuciones;
 
-    
-
-
-
     public Alimento() {
     }
 
@@ -52,7 +50,6 @@ public class Alimento {
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
         this.fechaRegistro = fechaRegistro;
-        
     }
 
     public Long getId() {
