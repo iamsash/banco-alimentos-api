@@ -1,17 +1,27 @@
 package com.bancodealimentos26.donaciones26.dto;
 
 import com.bancodealimentos26.donaciones26.model.Categoria;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AlimentoDTO {
 
     private Long id;
+
+    @NotBlank(message = "El nombre del alimento no puede estar vacío")
     private String nombre;
+
+    @NotBlank(message = "La descripción es obligatoria")
     private String descripcion;
+
+    @NotBlank(message = "La unidad de medida es obligatoria (ej. kg, litros)")
     private String unidadMedida;
+
+    @NotNull(message = "La fecha de registro es obligatoria")
     private LocalDate fechaRegistro;
 
-   private Categoria categoria;
+    private Categoria categoria;
 
     public AlimentoDTO() {
     }
@@ -27,52 +37,17 @@ public class AlimentoDTO {
         this.categoria = categoria;
     }
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
+    public String getNombre() { return nombre; }
+    public String getDescripcion() { return descripcion; }
+    public String getUnidadMedida() { return unidadMedida; }
+    public LocalDate getFechaRegistro() { return fechaRegistro; }
+    public Categoria getCategoria() { return categoria; }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public String getUnidadMedida() {
-        return unidadMedida;
-    }
-
-    public LocalDate getFechaRegistro() {
-        return fechaRegistro;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public void setUnidadMedida(String unidadMedida) {
-        this.unidadMedida = unidadMedida;
-    }
-
-    public void setFechaRegistro(LocalDate fechaRegistro) {
-        this.fechaRegistro = fechaRegistro;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
+    public void setId(Long id) { this.id = id; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
+    public void setUnidadMedida(String unidadMedida) { this.unidadMedida = unidadMedida; }
+    public void setFechaRegistro(LocalDate fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+    public void setCategoria(Categoria categoria) { this.categoria = categoria; }
 }
-    
