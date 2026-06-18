@@ -1,5 +1,6 @@
 package com.bancodealimentos26.donaciones26.dto;
 
+import com.bancodealimentos26.donaciones26.model.Categoria;
 import java.time.LocalDate;
 
 public class AlimentoDTO {
@@ -10,22 +11,20 @@ public class AlimentoDTO {
     private String unidadMedida;
     private LocalDate fechaRegistro;
 
-    private Long categoriaId;
-    private String categoriaNombre;
+   private Categoria categoria;
 
     public AlimentoDTO() {
     }
 
     public AlimentoDTO(Long id, String nombre, String descripcion,
                        String unidadMedida, LocalDate fechaRegistro,
-                       Long categoriaId, String categoriaNombre) {
+                       Categoria categoria) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
         this.fechaRegistro = fechaRegistro;
-        this.categoriaId = categoriaId;
-        this.categoriaNombre = categoriaNombre;
+        this.categoria = categoria;
     }
 
     public Long getId() {
@@ -48,12 +47,8 @@ public class AlimentoDTO {
         return fechaRegistro;
     }
 
-    public Long getCategoriaId() {
-        return categoriaId;
-    }
-
-    public String getCategoriaNombre() {
-        return categoriaNombre;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
     public void setId(Long id) {
@@ -76,11 +71,8 @@ public class AlimentoDTO {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public void setCategoriaId(Long categoriaId) {
-        this.categoriaId = categoriaId;
-    }
-
-    public void setCategoriaNombre(String categoriaNombre) {
-        this.categoriaNombre = categoriaNombre;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 }
+    

@@ -16,30 +16,20 @@ public class AlimentoService {
 
     @Autowired
     private AlimentoRepository alimentoRepository;
-public List<AlimentoDTO> listarAlimentos() {
+
+
+    public List<AlimentoDTO> listarAlimentos() {
 
     return alimentoRepository.findAll()
             .stream()
-            .map(alimento -> {
-
-                Long categoriaId = alimento.getCategoria() != null
-                        ? alimento.getCategoria().getId()
-                        : null;
-
-                String categoriaNombre = alimento.getCategoria() != null
-                        ? alimento.getCategoria().getNombre()
-                        : null;
-
-                return new AlimentoDTO(
-                        alimento.getId(),
-                        alimento.getNombre(),
-                        alimento.getDescripcion(),
-                        alimento.getUnidadMedida(),
-                        alimento.getFechaRegistro(),
-                        categoriaId,
-                        categoriaNombre
-                );
-            })
+            .map(alimento -> new AlimentoDTO(
+                    alimento.getId(),
+                    alimento.getNombre(),
+                    alimento.getDescripcion(),
+                    alimento.getUnidadMedida(),
+                    alimento.getFechaRegistro(),
+                    alimento.getCategoria()
+            ))
             .collect(Collectors.toList());
 }
 
@@ -74,21 +64,12 @@ public List<AlimentoDTO> listarAlimentos() {
         return null;
     }
 
-    Long categoriaId = alimento.getCategoria() != null
-            ? alimento.getCategoria().getId()
-            : null;
-
-    String categoriaNombre = alimento.getCategoria() != null
-            ? alimento.getCategoria().getNombre()
-            : null;
-
-    return new AlimentoDTO(
-            alimento.getId(),
-            alimento.getNombre(),
-            alimento.getDescripcion(),
-            alimento.getUnidadMedida(),
-            alimento.getFechaRegistro(),
-            categoriaId,
-            categoriaNombre
-    );
+return new AlimentoDTO(
+        alimento.getId(),
+        alimento.getNombre(),
+        alimento.getDescripcion(),
+        alimento.getUnidadMedida(),
+        alimento.getFechaRegistro(),
+        alimento.getCategoria()
+);
 }}
