@@ -23,6 +23,9 @@ public List<UsuarioDTO> listarUsuarios() {
     return usuarioService.listarUsuarios();
 }
 
+    @GetMapping("/trabajadores")
+    public List<UsuarioDTO> listarTrabajadores() {return usuarioService.listarTrabajadores();
+    }
     @PostMapping
     public Usuario guardarUsuario(@RequestBody Usuario usuario) {
         return usuarioService.guardarUsuario(usuario);

@@ -25,10 +25,25 @@ public class UsuarioService {
                     usuario.getNombre(),
                     usuario.getEmail(),
                     usuario.getTelefono(),
+                    usuario.getRol(),
                     usuario.getFechaRegistro()
             ))
             .collect(Collectors.toList());
 }
+    public List<UsuarioDTO> listarTrabajadores() {
+
+        return usuarioRepository.findByRol(com.bancodealimentos26.donaciones26.model.Rol.TRABAJADOR)
+                .stream()
+                .map(usuario -> new UsuarioDTO(
+                        usuario.getId(),
+                        usuario.getNombre(),
+                        usuario.getEmail(),
+                        usuario.getTelefono(),
+                        usuario.getRol(),
+                        usuario.getFechaRegistro()
+                ))
+                .collect(Collectors.toList());
+    }
 
     public Usuario guardarUsuario(Usuario usuario) {
         return usuarioRepository.save(usuario);
@@ -46,6 +61,7 @@ public Usuario actualizarUsuario(Long id, Usuario usuarioActualizado) {
         usuario.setNombre(usuarioActualizado.getNombre());
         usuario.setEmail(usuarioActualizado.getEmail());
         usuario.setTelefono(usuarioActualizado.getTelefono());
+        usuario.setRol(usuarioActualizado.getRol());
 
         return usuarioRepository.save(usuario);
     }).orElse(null);

@@ -1,6 +1,8 @@
 package com.bancodealimentos26.donaciones26.dto;
 
+import com.bancodealimentos26.donaciones26.model.Rol;
 import java.time.LocalDate;
+
 
 public class UsuarioDTO {
 
@@ -8,16 +10,18 @@ public class UsuarioDTO {
     private String nombre;
     private String email;
     private String telefono;
+    private Rol rol;
     private LocalDate fechaRegistro;
 
     public UsuarioDTO() {
     }
 
-    public UsuarioDTO(Long id, String nombre, String email, String telefono, LocalDate fechaRegistro) {
+    public UsuarioDTO(Long id, String nombre, String email, String telefono,Rol rol, LocalDate fechaRegistro) {
         this.id = id;
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
+        this.rol = rol;
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -56,6 +60,10 @@ public class UsuarioDTO {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
+
+    public Rol getRol() {return rol;}
+
+    public void setRol(Rol rol) {this.rol = rol;}
 
     public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;

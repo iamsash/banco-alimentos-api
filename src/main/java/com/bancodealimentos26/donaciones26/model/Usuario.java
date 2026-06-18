@@ -12,6 +12,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Entity
 @Table(name = "usuarios")
@@ -29,6 +31,9 @@ public class Usuario {
 
     private String telefono;
 
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
     @Column(name = "fecha_registro")
     private LocalDate fechaRegistro;
 
@@ -41,10 +46,11 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String email, String telefono, LocalDate fechaRegistro) {
+    public Usuario(String nombre, String email, String telefono,Rol rol,LocalDate fechaRegistro) {
         this.nombre = nombre;
         this.email = email;
         this.telefono = telefono;
+        this.rol = rol;
         this.fechaRegistro = fechaRegistro;
     }
 
@@ -91,5 +97,9 @@ public class Usuario {
     public void setDonaciones(List<Donacion> donaciones) {
         this.donaciones = donaciones;
     }
+
+    public Rol getRol() {return rol;}
+
+    public void setRol(Rol rol) {this.rol = rol;}
 }
 
