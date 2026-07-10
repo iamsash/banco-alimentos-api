@@ -13,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
 
 
 @Service
@@ -28,7 +30,12 @@ public class DonacionService {
     @Autowired
     private AlimentoRepository alimentoRepository;
 
-    public List<DonacionDTO> listarDonaciones() {
+    public List<DonacionDTO> listarDonaciones()
+    
+    
+    {
+
+        
 
     return donacionRepository.findAll()
             .stream()
@@ -142,4 +149,28 @@ public class DonacionService {
 
     return donacionRepository.save(donacion);
 }
+public List<Integer> obtenerDonacionesPorMes() {
+
+    List<Integer> meses = new ArrayList<>();
+
+    for (int i = 0; i < 12; i++) {
+        meses.add(0);
+    }
+
+    List<Donacion> donaciones = donacionRepository.findAll();
+
+    for (Donacion donacion : donaciones) {
+
+        int mes = donacion.getFecha().getMonthValue();
+
+        meses.set(
+            mes - 1,
+            meses.get(mes - 1) + 1
+        );
+
+    }
+
+    return meses;
+
 }
+}  

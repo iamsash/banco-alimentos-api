@@ -47,4 +47,11 @@ public Donacion actualizarDonacion(@PathVariable Long id,
 
     return donacionService.actualizarDonacion(id, donacion);
 }
+
+@GetMapping("/estadisticas/mes")
+public List<Integer> obtenerDonacionesPorMes() {
+
+    return donacionService.obtenerDonacionesPorMes();
+
 }
+} 
