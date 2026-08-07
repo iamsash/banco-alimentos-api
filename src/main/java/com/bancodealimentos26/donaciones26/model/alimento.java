@@ -19,8 +19,8 @@ public class Alimento {
 
     private String nombre;
     private String descripcion;
-    
-   
+
+
 
     @Column(name = "unidad_medida")
     private String unidadMedida;
@@ -52,7 +52,7 @@ public class Alimento {
         this.descripcion = descripcion;
         this.unidadMedida = unidadMedida;
         this.fechaRegistro = fechaRegistro;
-        
+
     }
 
     public Long getId() {
